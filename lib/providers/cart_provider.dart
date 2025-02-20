@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:doodleblue_ecommerce/models/cart_model.dart';
 import 'package:doodleblue_ecommerce/models/product_model.dart';
+import 'package:doodleblue_ecommerce/utils/storage/shared_preference_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider extends ChangeNotifier {
   List<CartModel> _cartItems = []; // Store products with quantity
@@ -12,6 +12,8 @@ class CartProvider extends ChangeNotifier {
   List<CartModel> get cartItems => _cartItems;
 
   double get totalPrice => _totalPrice;
+
+  bool orderComplete = false;
 
   void addToCart(ProductModel product) {
     _cartItems.add(CartModel(
@@ -52,8 +54,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future<void> fetchCart() async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String>? jsonCart = prefs.getStringList('cart');
+    List<String>? jsonCart = await SharedPreferenceUtility.spGetStringList('cart');
 
     if (jsonCart != null) {
       _cartItems =
@@ -64,9 +65,15 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future<void> saveCart() async {
-    final SharedPreferences sp = await SharedPreferences.getInstance();
     List<String> jsonCart =
         _cartItems.map((item) => jsonEncode(item.toJson())).toList();
-    sp.setStringList('cart', jsonCart);
+    SharedPreferenceUtility.spSetStringList('cart', jsonCart);
   }
+
+  placeOrder(){
+    cartItems.clear();
+    saveCart();
+    orderComplete = true;
+  }
+
 }

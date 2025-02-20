@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doodleblue_ecommerce/core/constants/assets/images_strings.dart';
 import 'package:doodleblue_ecommerce/core/constants/colors/colors.dart';
 import 'package:doodleblue_ecommerce/core/constants/sizes/sizes.dart';
 import 'package:doodleblue_ecommerce/providers/cart_provider.dart';
+import 'package:doodleblue_ecommerce/widgets/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -13,6 +15,7 @@ class CheckoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
+      appBar: AppBar(title: Text('Order Review')),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(AppSizes.defaultSpace),
@@ -103,7 +106,9 @@ class CheckoutView extends StatelessWidget {
           : Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+
+            },
             child: Text("Confirm Order")),
       ),
     );

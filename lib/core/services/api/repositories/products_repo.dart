@@ -5,7 +5,6 @@ import 'package:doodleblue_ecommerce/core/services/api/core/api_response_model.d
 class ProductsRepository {
   static Future<ApiResponseModel> getProductListApiTrigger() async {
     final response = await ApiHandler.get(ApiConstants.productList);
-    print("resp---> $response");
     return response;
   }
 }

@@ -5,6 +5,8 @@ class AppSizes {
   static const double lg = 24.0;
   static const double xl = 32.0;
 
+  static const double appBarHeight = 56.0;
+
   static const int desktopScreenSize = 1366;
   static const int tabletScreenSize = 768;
   static const int mobileScreenSize = 360;

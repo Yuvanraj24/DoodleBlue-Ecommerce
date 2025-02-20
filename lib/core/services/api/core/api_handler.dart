@@ -10,12 +10,9 @@ class ApiHandler {
     String endpoint, {
     Map<String, String>? headers,
   }) async {
-    print('api start');
       final url = Uri.parse("${ApiConstants.baseUrl}$endpoint");
-      print('url is ---> $url');
       try {
         final response = await http.get(url, headers: headers ?? _defaultHeaders()).timeout(Duration(seconds: 30));
-        print("Api handler response ---> ${response.body}");
         return _handleResponse(response);
       } catch(e) {
         throw Exception("GET request failed $e");
